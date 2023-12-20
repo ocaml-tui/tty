@@ -10,8 +10,8 @@ tags: ["terminal" "ansi" "tty" "teletype" "utf8"]
 homepage: "https://github.com/leostera/tty"
 bug-reports: "https://github.com/leostera/tty/issues"
 depends: [
+  "dune" {>= "3.11"}
   "ocaml" {>= "5.1"}
-  "dune" {>= "3.11" & >= "3.11"}
   "uutf" {>= "1.0.3"}
   "odoc" {with-doc}
 ]

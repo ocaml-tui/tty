@@ -18,7 +18,6 @@
  (description "TTY is a library for directly interacting with teletypes and terminal emulators, including escape sequences, colors, and consuming stdin")
  (depends
    (ocaml (>= "5.1"))
-   (dune (>= "3.11"))
    (uutf (>= "1.0.3")))
  (tags (terminal ansi tty teletype utf8)))
 

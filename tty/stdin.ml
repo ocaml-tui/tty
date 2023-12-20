@@ -14,9 +14,12 @@ let restore_mode termios = Unix.tcsetattr stdin_fd TCSANOW termios
 
 let try_read () =
   let bytes = Bytes.create 8 in
-  match Unix.read stdin_fd bytes 0 8 with
-  | exception Unix.(Unix_error ((EINTR | EAGAIN | EWOULDBLOCK), _, _)) -> ()
-  | len -> Uutf.Manual.src decoder bytes 0 len
+  let ready, _, _ = Unix.select [ stdin_fd ] [] [] 0.0001 in
+  if ready = [] then ()
+  else
+    match Unix.read stdin_fd bytes 0 8 with
+    | exception Unix.(Unix_error ((EINTR | EAGAIN | EWOULDBLOCK), _, _)) -> ()
+    | len -> Uutf.Manual.src decoder bytes 0 len
 
 let uchar_to_str u =
   let buf = Buffer.create 8 in
@@ -32,8 +35,5 @@ let read_utf8 () =
       `Retry
   | `Malformed err -> `Malformed err
 
-let setup () =
-  Unix.set_nonblock stdin_fd;
-  set_raw_mode ()
-
+let setup () = set_raw_mode ()
 let shutdown termios = restore_mode termios

@@ -1,5 +1,13 @@
 # Changes
 
+## 0.0.2
+
+* fix: use select to check for reads, instead of setting the stdin fd to
+  non-blocking. This caused issues on Mint Tea's rendering of many emojis or
+  colored symbols.
+
+* chore: drop dune as a dependency to fix .opam files
+
 ## 0.0.1
 
 Initial release, including: 
