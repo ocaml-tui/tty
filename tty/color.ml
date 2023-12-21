@@ -1,5 +1,12 @@
 type t = RGB of int * int * int | ANSI of int | ANSI256 of int | No_color
 
+let pp fmt t =
+  match t with
+  | RGB (r, g, b) -> Format.fprintf fmt "RGB(%d,%d,%d)" r g b
+  | ANSI i -> Format.fprintf fmt "ANSI(%d)" i
+  | ANSI256 i -> Format.fprintf fmt "ANSI256(%d)" i
+  | No_color -> Format.fprintf fmt "No_color"
+
 exception Invalid_color of string
 exception Invalid_color_param of string
 exception Invalid_color_num of string * int

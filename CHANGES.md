@@ -8,6 +8,10 @@
 
 * chore: drop dune as a dependency to fix .opam files
 
+* feat: create colors from RGB tuples
+
+* feat: pretty print colors
+
 ## 0.0.1
 
 Initial release, including: 

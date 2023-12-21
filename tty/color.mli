@@ -5,7 +5,8 @@ type t = private
   | No_color
 
 val make : string -> t
-val of_rgb : (int * int * int) -> t
+val of_rgb : int * int * int -> t
+val pp : Format.formatter -> t -> unit
 
 exception Invalid_color of string
 exception Invalid_color_param of string
