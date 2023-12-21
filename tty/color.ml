@@ -20,6 +20,8 @@ let rgb str =
 let ansi i = ANSI i
 let ansi256 i = ANSI256 i
 let no_color = No_color
+let cap_rgb x = Int.(min (max 0 x) 255)
+let of_rgb (r, g, b) = RGB (cap_rgb r, cap_rgb g, cap_rgb b)
 
 let make str =
   if String.starts_with ~prefix:"#" str then rgb str
