@@ -1,3 +1,9 @@
+let rec string_contains ~sub_str = function
+  | "" -> sub_str = "" (* the empty string contains itself *)
+  | s ->
+      String.starts_with ~prefix:sub_str s
+      || string_contains ~sub_str (String.sub s 1 (String.length s - 1))
+
 type t = No_color | ANSI | ANSI256 | True_color
 
 let from_env () =
@@ -13,10 +19,12 @@ let from_env () =
 
   let is_tmux = match term_program with Some "tmux" -> true | _ -> false in
 
-  (* TODO(@leostera): String.contains "256color" "color" "ansi" *)
-  let is_256color = false in
-  let is_color = false in
-  let is_ansi = false in
+  let is_term sub_str =
+    term |> Option.map (string_contains ~sub_str) |> Option.value ~default:false
+  in
+  let is_256color = is_term "256color" in
+  let is_color = is_term "color" in
+  let is_ansi = is_term "ansi" in
 
   match (term, color_term) with
   | _, Some "true" -> ANSI256
