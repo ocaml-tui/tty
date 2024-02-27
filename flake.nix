@@ -13,22 +13,22 @@
           name = "tty";
           version = "0.0.2";
         in
-        {
-          devShells = {
-            default = mkShell {
-	      buildInputs = [ ocamlPackages.utop ];
-              inputsFrom = [ self'.packages.default ];
+          {
+            devShells = {
+              default = mkShell {
+                buildInputs = [ ocamlPackages.utop ];
+                inputsFrom = [ self'.packages.default ];
+              };
+            };
+
+            packages = {
+              default = buildDunePackage {
+                inherit version;
+                pname = name;
+                propagatedBuildInputs = with ocamlPackages; [ uutf ];
+                src = ./.;
+              };
             };
           };
-
-          packages = {
-            default = buildDunePackage {
-              inherit version;
-              pname = name;
-	      propagatedBuildInputs = with ocamlPackages; [ uutf ];
-              src = ./.;
-            };
-	  };
-        };
     };
 }
