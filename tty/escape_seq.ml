@@ -26,6 +26,7 @@ let erase_line_seq x = escape (Printf.sprintf "%dK" x)
 let scroll_up_seq x = escape (Printf.sprintf "%dS" x)
 let scroll_down_seq x = escape (Printf.sprintf "%dT" x)
 let save_cursor_position_seq = escape "s"
+let report_cursor_position_seq = escape "6n"
 let restore_cursor_position_seq = escape "u"
 let change_scrolling_region_seq x y = escape (Printf.sprintf "%d;%dr" x y)
 let insert_line_seq x = escape (Printf.sprintf "%dL" x)
@@ -57,6 +58,7 @@ let restore_screen_seq = escape "?47l"
 let save_screen_seq = escape "?47h"
 let alt_screen_seq = escape "?1049h"
 let exit_alt_screen_seq = escape "?1049l"
+let report_textarea_size_seq = escape "18t"
 
 (* Bracketed paste. *)
 let enable_bracketed_paste_seq = escape "?2004h"

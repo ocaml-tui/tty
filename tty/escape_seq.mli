@@ -46,6 +46,8 @@ val erase_line_seq : int -> unit -> unit
 val exit_alt_screen_seq : unit -> unit
 val hide_cursor_seq : unit -> unit
 val insert_line_seq : int -> unit -> unit
+val report_textarea_size_seq : unit -> unit
+val report_cursor_position_seq : unit -> unit
 val restore_cursor_position_seq : unit -> unit
 val restore_screen_seq : unit -> unit
 val save_cursor_position_seq : unit -> unit
